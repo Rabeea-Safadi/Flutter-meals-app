@@ -32,9 +32,19 @@ class MealDetailsScreen extends ConsumerWidget {
                       ? 'Meal added a favorite'
                       : 'Meal was removed from favorites')));
             },
-            icon: isFavorite
-                ? const Icon(Icons.star)
-                : const Icon(Icons.star_outline),
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return RotationTransition(
+                  turns: Tween(begin: 0.5, end: 1.0).animate(animation),
+                  child: child,
+                );
+              },
+              child: Icon(
+                isFavorite ? Icons.star : Icons.star_outline,
+                key: ValueKey(isFavorite),
+              ),
+            ),
           ),
         ],
         title: Text(selectedMeal.title),
@@ -42,11 +52,14 @@ class MealDetailsScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(
-              selectedMeal.imageUrl,
-              width: double.infinity,
-              height: 300,
-              fit: BoxFit.cover,
+            Hero(
+              tag: selectedMeal.id,
+              child: Image.network(
+                selectedMeal.imageUrl,
+                width: double.infinity,
+                height: 300,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 16),
             Text(
