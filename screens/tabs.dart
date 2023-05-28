@@ -39,8 +39,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   void _selectPage(index) {
     setState(() {
       _selectedPageIndex = index;
-      _activePageTitle =
-          _activePageTitle == 'Favorites' ? 'Categories' : 'Favorites';
+      _activePageTitle = _selectedPageIndex == 0 ? 'Categories' : 'Favorites';
     });
   }
 
@@ -78,7 +77,20 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           ),
         ],
       ),
-      drawer: MainDrawer(onSelectScreen: _setScreen),
+      // drawer: MainDrawer(onSelectScreen: _setScreen),
+      floatingActionButton: _selectedPageIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  useSafeArea: true,
+                  showDragHandle: true,
+                  context: context,
+                  builder: (context) => const FiltersScreen(),
+                );
+              },
+              child: const Icon(Icons.filter_list),
+            )
+          : null,
     );
   }
 }

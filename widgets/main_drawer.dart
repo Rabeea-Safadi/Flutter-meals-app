@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/screens/filters.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({
@@ -76,7 +77,12 @@ class MainDrawer extends StatelessWidget {
                   ),
             ),
             onTap: () {
-              onSelectScreen('filters');
+              Navigator.of(context).pop();
+              // onSelectScreen('filters');
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => const FiltersScreen(),
+              );
             },
           )
         ],

@@ -10,9 +10,9 @@ class FiltersScreen extends ConsumerWidget {
     final activeFilters = ref.watch(filtersProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Filters'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Your Filters'),
+      // ),
       body: Column(
         children: [
           SwitchListTile(
